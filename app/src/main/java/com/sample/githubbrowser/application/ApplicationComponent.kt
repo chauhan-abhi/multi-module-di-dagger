@@ -3,6 +3,7 @@ package com.sample.githubbrowser.application
 import android.content.Context
 import com.abhi.githubbrowser.githubapi.module.GitHubApiModule
 import com.abhi.githubbrowser.githubapi.network.GitHubApi
+import com.abhi.repository.AppRepository
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -16,6 +17,12 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [GitHubApiModule::class])
 interface ApplicationComponent {
+
+    /**
+     * Any other components depending on AppComponent will
+     * now be able to inject AppRepository
+     */
+    fun appRepository(): AppRepository
 
     @Component.Factory
     interface Factory {
