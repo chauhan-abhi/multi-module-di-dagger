@@ -6,7 +6,7 @@ import java.lang.IllegalArgumentException
 
 interface ApplicationDeps {
 
-    fun appRepository(appRepository: AppRepository)
+    fun appRepository(): AppRepository
 }
 
 /**

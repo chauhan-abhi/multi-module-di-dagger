@@ -17,6 +17,8 @@ import javax.inject.Singleton
  *
  * @see ApplicationDeps -> extending this allow dagger to recognize heirarchy of
  * interfaces and understand ApplicationComponent can still provide appRepository
+ * We are telling Dagger that ApplicationComponent needs to be able to provide AppRepository
+ *
  */
 @Singleton
 @Component(modules = [GitHubApiModule::class])
@@ -33,7 +35,8 @@ interface ApplicationComponent: ApplicationDeps {
     @Component.Factory
     interface Factory {
 
-        // Takes in Application context and binds it to dependency graph
+        // Takes in Application context and binds the context to dependency graph
+        // ie objects injected by application component are able to inject Context
         // Dagger will generate the implementation of the interface
         fun create(@BindsInstance context: Context): ApplicationComponent
     }
