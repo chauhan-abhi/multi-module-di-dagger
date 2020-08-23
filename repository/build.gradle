@@ -35,7 +35,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(":githubapi")
+    // to access repoitemmodel in viewmodel class
+    api project(":githubapi")
 
     implementation deps.dagger.core
 
