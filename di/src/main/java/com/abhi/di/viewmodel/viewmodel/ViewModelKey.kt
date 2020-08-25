@@ -1,4 +1,4 @@
-package com.abhi.di.viewmodel
+package com.abhi.di.viewmodel.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

@@ -1,7 +1,7 @@
 package com.abhi.home.di
 
 import androidx.lifecycle.ViewModel
-import com.abhi.di.viewmodel.ViewModelKey
+import com.abhi.di.viewmodel.viewmodel.ViewModelKey
 import com.abhi.home.HomeViewModel
 import dagger.Binds
 import dagger.Module

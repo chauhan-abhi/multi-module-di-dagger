@@ -2,6 +2,8 @@ package com.abhi.home.di
 
 import com.abhi.appdeps.ApplicationDeps
 import com.abhi.appdeps.applicationDeps
+import com.abhi.di.viewmodel.component.getComponent
+import com.abhi.di.viewmodel.scope.ScreenScope
 import com.abhi.home.HomeFragment
 import dagger.Component
 
@@ -9,6 +11,7 @@ import dagger.Component
  * dependencies = [ApplicationsDeps] signify HomeComponents is dependent
  * on AppComponent for dependencies
  */
+@ScreenScope
 @Component(dependencies = [ApplicationDeps::class], modules = [HomeModule::class])
 interface HomeComponent {
 
@@ -23,8 +26,11 @@ interface HomeComponent {
     }
 }
 
+
 fun HomeFragment.inject() {
-    DaggerHomeComponent.factory()
-        .create(requireContext().applicationDeps())
-        .inject(this)
+    getComponent {
+        DaggerHomeComponent.factory()
+            .create(requireContext().applicationDeps())
+    }.inject(this)
+
 }
