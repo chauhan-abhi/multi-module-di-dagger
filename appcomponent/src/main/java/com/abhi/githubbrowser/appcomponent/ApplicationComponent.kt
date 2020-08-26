@@ -1,10 +1,8 @@
-package com.sample.githubbrowser.application
+package com.abhi.githubbrowser.appcomponent
 
 import android.content.Context
 import com.abhi.appdeps.ApplicationDeps
 import com.abhi.githubbrowser.githubapi.module.GitHubApiModule
-import com.abhi.githubbrowser.githubapi.network.GitHubApi
-import com.abhi.repository.AppRepository
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

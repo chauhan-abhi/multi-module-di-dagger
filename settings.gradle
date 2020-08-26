@@ -1,3 +1,5 @@
+include ':appcomponent'
+include ':testing:app'
 include ':appdeps'
 include ':di'
 include ':home'

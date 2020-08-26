@@ -57,7 +57,7 @@ class HomeFragment: Fragment() {
             )
         }
 
-        homeViewModel.viewStateUpdates.observe(this, Observer { state ->
+        homeViewModel.viewStateUpdates.observe(viewLifecycleOwner, Observer { state ->
             when(state) {
                 is HomeViewStateLoading -> handleLoadingState(binding)
                 is HomeViewStateLoaded  -> handleLoadedState(state, binding)
