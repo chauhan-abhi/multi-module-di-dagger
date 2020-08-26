@@ -2,10 +2,11 @@ package com.abhi.repository
 
 import com.abhi.githubbrowser.githubapi.model.RepoApiModel
 import com.abhi.githubbrowser.githubapi.model.UserApiModel
-import com.abhi.githubbrowser.githubapi.network.GitHubApi
+import com.abhi.githubbrowser.testing.app.githubapi.FakeGitHubApi
 import org.junit.Before
 import org.junit.Test
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.runBlocking
 
 
 private val fakeRepoApiModel = RepoApiModel(
@@ -23,7 +24,8 @@ private val fakeRepoApiModel = RepoApiModel(
 class AppRepositoryTest {
 
     private lateinit var appRepository: AppRepository
-    private val fakeGithubApi = FakeGithubApi()
+    private val fakeGithubApi = FakeGitHubApi().apply { repos = listOf(fakeRepoApiModel) }
+
     @Before
     fun setUp() {
         appRepository = AppRepository(fakeGithubApi)
@@ -32,14 +34,8 @@ class AppRepositoryTest {
 
     @Test
     fun successfulQuery() {
-        val topRepos = appRepository.getTopRepos()
+        val topRepos = runBlocking { appRepository.getTopRepos() }
         assertThat(topRepos.size).isEqualTo(1)
         assertThat(topRepos[0]).isEqualTo(fakeRepoApiModel)
-    }
-}
-
-private class FakeGithubApi: GitHubApi {
-    override fun getTopRepositories(): List<RepoApiModel> {
-        return listOf(fakeRepoApiModel)
     }
 }

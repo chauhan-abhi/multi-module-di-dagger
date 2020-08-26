@@ -3,11 +3,13 @@ package com.abhi.home
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.abhi.githubbrowser.githubapi.model.RepoApiModel
 import com.abhi.githubbrowser.githubapi.model.UserApiModel
-import com.abhi.githubbrowser.githubapi.network.GitHubApi
+import com.abhi.githubbrowser.testing.app.githubapi.FakeGitHubApi
 import com.abhi.home.list.RepoItem
 import com.abhi.repository.AppRepository
 import org.junit.Before
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.setMain
 import org.junit.Rule
 import org.junit.Test
 
@@ -34,7 +36,8 @@ class HomeViewModelTest {
 
     @Before
     fun setUp() {
-        val appRepository = AppRepository(FakeGithubApi())
+        Dispatchers.setMain(Dispatchers.Unconfined)
+        val appRepository = AppRepository(FakeGitHubApi())
         viewStateValue = mutableListOf()
 
         viewModel = HomeViewModel(appRepository)
@@ -56,11 +59,5 @@ class HomeViewModelTest {
         )
 
         assertThat(viewStateValue[0]).isEqualTo(expectedState)
-    }
-}
-
-private class FakeGithubApi: GitHubApi {
-    override fun getTopRepositories(): List<RepoApiModel> {
-        return listOf(fakeRepoApiModel)
     }
 }
