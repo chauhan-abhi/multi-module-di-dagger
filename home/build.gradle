@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.sample.githubbrowser.testing.app.GitHubBrowserTestRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -32,7 +32,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -43,6 +43,7 @@ dependencies {
     implementation project(":repository")
 
     implementation deps.androidx.constraintlayout
+    implementation deps.androidx.fragment
     implementation deps.androidx.livedata
     implementation deps.androidx.viewmodel
     implementation deps.androidx.recyclerview
@@ -56,8 +57,12 @@ dependencies {
 
     testImplementation deps.androidx.archtesting
     testImplementation deps.truth
+    testImplementation 'junit:junit:4.13'
 
-    testImplementation 'junit:junit:4.12'
+
+    androidTestImplementation deps.androidx.fragmenttesting
+    androidTestImplementation project(":testing:app")
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

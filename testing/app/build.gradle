@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation project(":appcomponent")
+    api project(":appcomponent")
     implementation project(":appdeps")
 
     implementation deps.dagger.core
